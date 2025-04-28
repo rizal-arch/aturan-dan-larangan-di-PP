@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aturan Pondok Pesantren</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .top-bar {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1d5e5e 0%, #2a7474 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .search-container {
+            background-color: white;
+            border-radius: 25px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .search-container input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 5px;
+            font-size: 1rem;
+        }
+        
+        .search-icon {
+            margin-right: 10px;
+            color: #888;
+        }
+        
+        .get-started {
+            text-align: center;
+            margin: 20px 0;
+            color: #1d5e5e;
+            font-weight: 500;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .menu-image {
+            width: 80px;
+            height: 80px;
+            background-color: #e4f2ff;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .menu-image.blue {
+            background-color: #e4f2f2;
+        }
+        
+        .menu-image.green {
+            background-color: #e4ffff;
+        }
+        
+        .menu-image.purple {
+            background-color: #e4f2f2;
+        }
+        
+        .menu-image.pink {
+            background-color: #e4ffff;
+        }
+        
+        .menu-item p {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d5e5e;
+        }
+        
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .modal-body ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .modal-body li {
+            margin-bottom: 8px;
+        }
+        
+        .modal-body h3 {
+            margin: 15px 0 10px;
+            color: #1d5e5e;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTI1MCA0NUM5Ni4zIDQ1IDIwMyA0OSAxMjAuNyA5My42QzUzLjcgMTQ0IDQwLjEgMjExLjMgNTEuMSAzMDUuNkM2My4xIDQwMi42IDE0MC45IDQ1NSAyNTAgNDU1QzM1OS4xIDQ1NSA0NDQuOSA0MDIuNiA0NDguOSAzMDUuNkM0NTMuOSAyMTEuMyA0MjguMyAxNDQgMzc5LjMgOTMuNkMyOTYuOCA0OSAzNjIuMiA0NSAyNTAgNDVaIiBmaWxsPSIjMWQ1ZTVlIiBzdHJva2U9IiMyODc3N2EiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8cGF0aCBkPSJNMjUwIDc1QzEwNiA3NSAyMTMgNzkgMTM3LjMgMTIwLjNDNzUuNyAxNjYuOSA2My4zIDIyOS4zIDczLjQgMzE2LjRDODQuMyAzOTcuMyAxNTUuNiA0NDUgMjUwIDQ0NUMzNDQuNCA0NDUgNDI1LjEgMzk3LjMgNDI4LjcgMzE2LjVDNDMzLjIgMjI5LjMgNDEwLjMgMTY2LjkgMzYyLjcgMTIwLjNDMjg2LjcgNzkgMzY4LjIgNzUgMjUwIDc1WiIgZmlsbD0iIzFkNWU1ZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iMjUwIiByPSIxNTAiIGZpbGw9IndoaXRlIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIyNTAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMWQ1ZTVlIj5QT05ET0sgUEVTQU5UUkVOIE5VUiBISURBWUFUVVQgVEhPTElCSU48L3RleHQ+CiAgPHRleHQgeD0iMjUwIiB5PSIzNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzFkNWU1ZSI+S0FERU1BTkdBTiAtIFBBR0VMQVJBTjwvdGV4dD4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNTAsIDI0MCkiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjcwIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMWQ1ZTVlIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI0MCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzFkNWU1ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICA8cGF0aCBkPSJNLTM5LDAgQS00MCw0MCAwIDAsMSAzOSwwIEEtNDAsNDAgMCAwLDEgLTM5LDAiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMxZDVlNWUiIHN0cm9rZS13aWR0aD0iMSIvPgogICAgPHBhdGggZD0iTS02OSwtMTAgQTcwLDcwIDAgMCwxIDY5LC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWQ1ZTVlIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIDxwYXRoIGQ9Ik0tNjksMTAgQTcwLDcwIDAgMCwwIDY5LDEwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxZDVlNWUiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgPHBhdGggZD0iTS00MCwwIEMtMTAsLTIwIC0xMCwtNyAwLC03IEMxMCwtNyAxMCwtMjAgNDAsMCBDMTAsMjAgMTAsNyAwLDcgQy0xMCw3IC0xMCwyMCAtNDAsMCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzFkNWU1ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICA8cGF0aCBkPSJNMTAsLTI1IEwyMCwtMTAgTDMwLC0yMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWQ1ZTVlIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgwLCAxODUpIj4KICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKC0zMCkiPgogICAgICA8cGF0aCBkPSJNMCwtMyBMMCwtMjAgTDEsLTIwIEwyLC0zIEMxLjUsLTQgMC41LC00IDAuMCwtMyIgZmlsbD0iIzFkNWU1ZSIvPgogICAgPC9nPgogIDwvZz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOTAsIDE3NSkiPgogICAgPHRleHQgeD0iMCIgeT0iMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxZDVlNWUiPio8L3RleHQ+CiAgPC9nPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwMCwgMjEwKSI+CiAgICA8dGV4dCB4PSIwIiB5PSIwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFkNWU1ZSI+KjwvdGV4dD4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzEwLCAxODApIj4KICAgIDx0ZXh0IHg9IjAiIHk9IjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMWQ1ZTVlIj4qPC90ZXh0PgogIDwvZz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsIDIwMCkiPgogICAgPHRleHQgeD0iMCIgeT0iMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxZDVlNWUiPio8L3RleHQ+CiAgPC9nPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIyMCwgMTcwKSI+CiAgICA8dGV4dCB4PSIwIiB5PSIwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFkNWU1ZSI+KjwvdGV4dD4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgwLCAyMTApIj4KICAgIDx0ZXh0IHg9IjAiIHk9IjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMWQ1ZTVlIj4qPC90ZXh0PgogIDwvZz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNTAsIDE4MCkiPgogICAgPHRleHQgeD0iMCIgeT0iMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMxZDVlNWUiPio8L3RleHQ+CiAgPC9nPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI3MCwgMTcwKSI+CiAgICA8dGV4dCB4PSIwIiB5PSIwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzFkNWU1ZSI+KjwvdGV4dD4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTgwLCAyMTApIj4KICAgIDx0ZXh0IHg9IjAiIHk9IjAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMWQ1ZTVlIj4qPC90ZXh0PgogIDwvZz4KPC9zdmc+" class="logo" alt="Logo Pondok Pesantren">
+        Aturan Pondok Pesantren
+    </div>
+    
+    <div class="header">
+        <h1>Mulai Kehidupan<br>Pesantren dengan Baik</h1>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Cari disini">
+        </div>
+    </div>
+    
+    <div class="get-started">
+        <h2>Bagaimana cara memulai?</h2>
+    </div>
+    
+    <div class="menu-grid">
+        <div class="menu-item" onclick="showModal('aturan')">
+            <div class="menu-image blue">
+                <span style="font-size: 2rem;">📋</span>
+            </div>
+            <p>Aturan Pondok</p>
+        </div>
+        
+        <div class="menu-item" onclick="showModal('larangan')">
+            <div class="menu-image green">
+                <span style="font-size: 2rem;">⛔</span>
+            </div>
+            <p>Larangan</p>
+        </div>
+        
+        <div class="menu-item" onclick="showModal('sanksi')">
+            <div class="menu-image purple">
+                <span style="font-size: 2rem;">⚠️</span>
+            </div>
+            <p>Sanksi</p>
+        </div>
+        
+        <div class="menu-item" onclick="showModal('info')">
+            <div class="menu-image pink">
+                <span style="font-size: 2rem;">ℹ️</span>
+            </div>
+            <p>Informasi Lainnya</p>
+        </div>
+    </div>
+    
+    <!-- Modal Aturan -->
+    <div id="aturanModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Aturan Pondok</div>
+                <button class="close-button" onclick="hideModal('aturan')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Seluruh santri wajib menaati peraturan yang ditetapkan pengasuh</li>
+                    <li>Santri wajib menjaga tingkah laku dan akhlak untuk nama baik pondok</li>
+                    <li>Santri wajib menjaga fasilitas pondok (lingkungan, kamar, kamar mandi, dapur, tempat ibadah)</li>
+                    <li>Santri wajib mengikuti kegiatan wajib pondok (absensi diberlakukan)</li>
+                    <li>Santri wajib meminta izin keluar pondok kepada petugas piket</li>
+                    <li>Untuk izin pulang/keluar bersama keluarga wajib izin ke pengasuh</li>
+                    <li>Santri wajib mengambil jatah makan di pondok sesuai waktu yang ditentukan</li>
+                    <li>Setelah sholat hajat, santri harus berada di kamar/istirahat (jam malam)</li>
+                    <li>Santri wajib melaksanakan kegiatan ro'an (kerja bakti) bersama seminggu sekali</li>
+                    <li>Santri wajib menitipkan uang saku kepada ketua kamar/pengurus</li>
+                    <li>Waktu sambangan hanya di hari Kamis setelah Duhur sampai Jum'at sebelum Duhur</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Larangan -->
+    <div id="laranganModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Larangan</div>
+                <button class="close-button" onclick="hideModal('larangan')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Dilarang merusak atau mengotori fasilitas pondok</li>
+                    <li>Dilarang tidak mengikuti kegiatan wajib pondok tanpa udzur yang jelas</li>
+                    <li>Dilarang keluar pondok tanpa izin atau melewati batas toleransi waktu</li>
+                    <li>Dilarang membeli makanan di luar pondok</li>
+                    <li>Bagi santri putra dilarang bertelanjang dada dan memakai celana pendek di luar kamar</li>
+                    <li>Dilarang menemui wali atau keluarga yang sambang di waktu wajib kegiatan</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Sanksi -->
+    <div id="sanksiModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Sanksi</div>
+                <button class="close-button" onclick="hideModal('sanksi')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>Pelanggaran Ringan:</h3>
+                <ul>
+                    <li>Santri putra: Membersihkan pondok dari halaman sampai dapur, menyapu dan mengepel lantai</li>
+                    <li>Santri putri: Membersihkan area pondok putri beserta aula</li>
+                </ul>
+                
+                <h3>Pelanggaran Berat:</h3>
+                <ul>
+                    <li>Santri putra: Digundul dan membersihkan pondok</li>
+                    <li>Santri putri: Membaca Al-Qur'an selama 1-2 jam dengan berdiri di depan pondok putri dan membersihkan area pondok putri</li>
+                </ul>
+                
+                <h3>Sanksi Lainnya:</h3>
+                <ul>
+                    <li>Perusakan fasilitas: Ta'zir (hukuman) dan mengganti fasilitas yang dirusak</li>
+                    <li>Tidak mengikuti kegiatan wajib: Ta'zir</li>
+                    <li>Melewati batas toleransi izin: Ta'zir</li>
+                    <li>Membeli makan di luar: Sanksi denda</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Info -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Informasi Lainnya</div>
+                <button class="close-button" onclick="hideModal('info')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>Peraturan Izin Keluar:</h3>
+                <ul>
+                    <li>Waktu izin: setelah ngaji subuh sampai jam 09.00 WIB</li>
+                    <li>Maksimal 3x izin keluar dalam sehari</li>
+                    <li>Hanya boleh izin saat jam kosong (di luar kegiatan wajib)</li>
+                </ul>
+                
+                <h3>Izin Pulang:</h3>
+                <ul>
+                    <li>Waktu lama izin harus ditentukan (default 3 hari jika tidak ditentukan)</li>
+                    <li>Jika melewati waktu, wali santri harus memberi keterangan</li>
+                </ul>
+                
+                <h3>Jadwal Kebersihan:</h3>
+                <p>Jadwal kebersihan sudah tertera. Apabila ada pembaharuan jadwal silahkan hubungi pengurus.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showModal(type) {
+            document.getElementById(type + 'Modal').style.display = 'block';
+        }
+        
+        function hideModal(type) {
+            document.getElementById(type + 'Modal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            var modals = document.getElementsByClassName('modal');
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
